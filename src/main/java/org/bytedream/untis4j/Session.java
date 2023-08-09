@@ -147,11 +147,12 @@ public class Session {
      * @since 1.1
      */
     private <T extends BaseResponse> T requestSender(UntisUtils.Method method, Map<String, ?> params, ResponseConsumer<? extends T> action) throws IOException {
-        if (useCache) {
-            return action.getResponse(requestManager.CachedPOST(method.getMethod(), params));
-        } else {
-            return action.getResponse(requestManager.POST(method.getMethod(), params));
-        }
+        return action.getResponse(requestManager.POST(method.getMethod(), params));
+        // if (useCache) {
+        //     return action.getResponse(requestManager.CachedPOST(method.getMethod(), params));
+        // } else {
+        //     return action.getResponse(requestManager.POST(method.getMethod(), params));
+        // }
     }
 
     /**

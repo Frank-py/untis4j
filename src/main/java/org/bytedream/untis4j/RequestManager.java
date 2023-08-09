@@ -28,7 +28,7 @@ public class RequestManager {
     private final Infos infos;
     private final String url;
     private boolean loggedIn = true;
-    private final LoadingCache<String, Response> requests = Caffeine.newBuilder().maximumSize(1_000).expireAfterWrite(Duration.ofMinutes(10)).refreshAfterWrite(Duration.ofMinutes(1)).build(this::POST);
+    //private final LoadingCache<String, Response> requests = Caffeine.newBuilder().maximumSize(1_000).expireAfterWrite(Duration.ofMinutes(10)).refreshAfterWrite(Duration.ofMinutes(1)).build(this::POST);
 
     /**
      * Initialize the {@link RequestManager} class
@@ -137,18 +137,18 @@ public class RequestManager {
      * @throws IOException if an IO Exception occurs
      * @since 1.0
      */
-    public Response CachedPOST(String method, Map<String, ?> params) throws IOException {
+    // public Response CachedPOST(String method, Map<String, ?> params) throws IOException {
 
-        if (loggedIn) {
-            Response response = requests.get(UntisUtils.processParams(method, params));
-            if (method.equals(UntisUtils.Method.LOGOUT.getMethod()) && loggedIn && response != null) {
-                loggedIn = false;
-            }
-            return response;
-        } else {
-            throw new LoginException("Not logged in");
-        }
-    }
+    //     if (loggedIn) {
+    //         Response response = requests.get(UntisUtils.processParams(method, params));
+    //         if (method.equals(UntisUtils.Method.LOGOUT.getMethod()) && loggedIn && response != null) {
+    //             loggedIn = false;
+    //         }
+    //         return response;
+    //     } else {
+    //         throw new LoginException("Not logged in");
+    //     }
+    // }
 
     /**
      * Sends a POST request to the server
